@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="javascripts/jquery.js"></script>
+    <script src="javascripts/microsocket.js"></script>
+</head>
+<body>
+<div id="chat">
+</div>
+<input id="msg">
+<button id="connect">connect</button>
+<script>
+    var ms = new MicroSocket();
+    ms.on("message", function (msg) {
+        console.log("on message", msg);
+        var $div = $('<div>');
+        $div.text(msg);
+        $('#chat').append($div);
+    });
+    $('#connect').click(function () {
+        ms.emit("message", $('#msg').val());
+    });
+</script>
+
+</body>
+</html>
